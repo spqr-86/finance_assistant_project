@@ -1,2 +1,2 @@
-# finance_assistant_project
-Finance assistant project
+# financial_assistant_project
+Financial assistant project

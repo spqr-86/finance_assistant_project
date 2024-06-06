@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transactions List</title>
+    <!-- Materialize CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+    <!-- Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        .transaction-table th, .transaction-table td {
+            vertical-align: middle;
+        }
+        .modal { max-width: 600px; }
+        .modal-footer { display: flex; justify-content: flex-end; }
+    </style>
+</head>
+<body>
+
+<div class="container my-5">
+    <h1 class="center-align mb-4">Transactions</h1>
+    
+    <!-- Filter Form -->
+    <div class="card mb-4">
+        <div class="card-content">
+            <span class="card-title">Filter Transactions</span>
+            <form id="filter-form">
+                <div class="row">
+                    <div class="input-field col s12 m3">
+                        <input type="text" class="datepicker" id="start-date" name="start-date">
+                        <label for="start-date">Start Date</label>
+                    </div>
+                    <div class="input-field col s12 m3">
+                        <input type="text" class="datepicker" id="end-date" name="end-date">
+                        <label for="end-date">End Date</label>
+                    </div>
+                    <div class="input-field col s12 m3">
+                        <select id="category" name="category">
+                            <option value="" selected>All</option>
+                            <option value="income">Income</option>
+                            <option value="expense">Expense</option>
+                            <!-- Add more categories as needed -->
+                        </select>
+                        <label for="category">Category</label>
+                    </div>
+                    <div class="input-field col s12 m3">
+                        <button type="submit" class="btn waves-effect waves-light w-100">Filter</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Transaction Button -->
+    <div class="right-align mb-4">
+        <button class="btn waves-effect waves-light green modal-trigger" data-target="addTransactionModal">
+            <i class="material-icons left">add</i> Add Transaction
+        </button>
+    </div>
+
+    <!-- Transactions Table -->
+    <div class="card">
+        <div class="card-content">
+            <span class="card-title">Transactions List</span>
+            <div class="responsive-table">
+                <table class="highlight">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Description</th>
+                            <th>Category</th>
+                            <th>Type</th>
+                            <th>Amount</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Sample data, replace with dynamic data as needed -->
+                        <tr>
+                            <td>2024-06-01</td>
+                            <td>Salary</td>
+                            <td>Income</td>
+                            <td>Income</td>
+                            <td>$2000</td>
+                            <td>
+                                <button class="btn-small amber darken-2">Edit</button>
+                                <button class="btn-small red darken-2">Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2024-06-02</td>
+                            <td>Groceries</td>
+                            <td>Expense</td>
+                            <td>Expense</td>
+                            <td>$150</td>
+                            <td>
+                                <button class="btn-small amber darken-2">Edit</button>
+                                <button class="btn-small red darken-2">Delete</button>
+                            </td>
+                        </tr>
+                        <!-- Repeat for more transactions -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Transaction Modal -->
+<div id="addTransactionModal" class="modal">
+    <div class="modal-content">
+        <h5>Add Transaction</h5>
+        <form id="add-transaction-form">
+            <div class="input-field">
+                <input type="text" class="datepicker" id="transaction-date" name="transaction-date" required>
+                <label for="transaction-date">Date</label>
+            </div>
+            <div class="input-field">
+                <input type="text" id="transaction-description" name="transaction-description" required>
+                <label for="transaction-description">Description</label>
+            </div>
+            <div class="input-field">
+                <select id="transaction-category" name="transaction-category" required>
+                    <option value="" disabled selected>Choose category</option>
+                    <option value="income">Income</option>
+                    <option value="expense">Expense</option>
+                    <!-- Add more categories as needed -->
+                </select>
+                <label for="transaction-category">Category</label>
+            </div>
+            <div class="input-field">
+                <select id="transaction-type" name="transaction-type" required>
+                    <option value="" disabled selected>Choose type</option>
+                    <option value="income">Income</option>
+                    <option value="expense">Expense</option>
+                </select>
+                <label for="transaction-type">Type</label>
+            </div>
+            <div class="input-field">
+                <input type="number" id="transaction-amount" name="transaction-amount" required>
+                <label for="transaction-amount">Amount</label>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn waves-effect waves-light">Add Transaction</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Materialize JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.modal');
+        var instances = M.Modal.init(elems);
+        
+        var dateElems = document.querySelectorAll('.datepicker');
+        M.Datepicker.init(dateElems, {
+            format: 'yyyy-mm-dd'
+        });
+        
+        var selectElems = document.querySelectorAll('select');
+        M.FormSelect.init(selectElems);
+    });
+</script>
+</body>
+</html>

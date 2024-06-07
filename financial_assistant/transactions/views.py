@@ -1,28 +1,9 @@
-# Импортируем функцию render()
-from django.shortcuts import render
+from django.urls import reverse_lazy
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from .models import Transaction
 
-ice_cream_catalog = [
-    {
-        'id': 0,
-        'title': 'Классический пломбир',
-        'description': 'Настоящее мороженое, '
-                       'для истинных ценителей вкуса. '
-                       'Если на столе появляется пломбир'
-                       ' — это не надолго.',
-    },
-    {
-        'id': 1,
-        'title': 'Мороженое с кузнечиками',
-        'description': 'В колумбийском стиле: мороженое '
-                       'с добавлением настоящих карамелизованных кузнечиков.',
-    },
-    {
-        'id': 2,
-        'title': 'Мороженое со вкусом сыра чеддер',
-        'description': 'Вкус настоящего сыра в вафельном стаканчике.',
-    },
-]
 
-def transactions_list(request):
+class TransactionListView(ListView):
+    model = Transaction
     template_name = 'transactions/list.html'
-    return render(request, template_name)
+    context_object_name = 'transactions'

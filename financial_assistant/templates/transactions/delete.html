@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}
+  Транзакции
+{% endblock %}
+
+{% block content %}
+  <h5 class="center-align">Удалить запись {{ object.pk }}</h5>
+  <p>{{ object.date }}</p> 
+  <p>{{ object.description }}</p> 
+  <p>{{ object.ammount }}</p>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn waves-effect waves-light">Удалить</button>
+  </form>
+{% endblock %}

@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+from .validators import validate_not_future_date
 
 class Category(models.Model):
     name = models.CharField(
@@ -75,7 +76,7 @@ class Transaction(models.Model):
         on_delete=models.CASCADE,
         verbose_name='Пользователь',
         )
-    date = models.DateField(verbose_name='Дата')
+    date = models.DateField(verbose_name='Дата', validators=[validate_not_future_date])
     description = models.CharField(
         max_length=255,
         verbose_name='Описание',
@@ -115,16 +116,22 @@ class Transaction(models.Model):
         max_length=20, 
         choices=PAYMENT_METHOD_CHOICES,
         verbose_name='Способ оплаты',
+        blank=True, 
+        null=True, 
     )
     status = models.CharField(
         max_length=10, 
         choices=STATUS_CHOICES, 
         default='completed',
         verbose_name='Статус',
+        blank=True, 
+        null=True, 
     )
     is_recurring = models.BooleanField(
         default=False,
         verbose_name='Повторяющаяся транзакция',
+        blank=True, 
+        null=True, 
     )
     recurrence_period = models.CharField(
         max_length=20, 

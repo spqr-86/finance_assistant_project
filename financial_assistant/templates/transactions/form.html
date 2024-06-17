@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}
+  Транзакции
+{% endblock %}
+
+{% block content %}
+  {% with data=form.instance %}
+    {% if "/edit/" in request.path %}
+      <h5 class="center-align">Редактировать транзакцию</h5>
+    {% else %}
+      <h5 class="center-align">Новая транзакция</h5>
+    {% endif %}  
+
+    <form method="post">
+      <table>
+        {% csrf_token %}
+        {{ form }}
+      </table>
+      <div class="form-footer">
+        <button type="submit" class="btn waves-effect waves-light">Отправить</button>
+      </div> 
+    </form>
+
+    <!-- Подключение Materialize JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('select');
+        M.FormSelect.init(elems);    
+        var dateElems = document.querySelectorAll('.datepicker');
+        M.Datepicker.init(dateElems, {
+          format: 'yyyy-mm-dd'
+        });
+      });
+    </script>
+  {% endwith %}
+{% endblock %}

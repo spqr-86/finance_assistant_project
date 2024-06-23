@@ -1,0 +1,9 @@
+.transaction-table th, .transaction-table td {
+   vertical-align: middle;
+}
+
+.form-footer {
+    display: flex;
+    justify-content:
+    flex-end;
+}

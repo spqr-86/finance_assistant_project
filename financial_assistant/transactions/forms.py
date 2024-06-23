@@ -16,4 +16,9 @@ class TransactionForm(forms.ModelForm):
         ]
         widgets = {
             'date': forms.DateInput(attrs={'type': 'date'})
-        } 
+        }
+
+
+class PDFUploadForm(forms.Form):
+    pdf_file = forms.FileField()
+

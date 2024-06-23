@@ -17,6 +17,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'debug_toolbar',
+    'django_plotly_dash.apps.DjangoPlotlyDashConfig',
+    'channels',
 ]
 
 MIDDLEWARE = [
@@ -28,6 +30,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'django_plotly_dash.middleware.BaseMiddleware',
 ]
 
 ROOT_URLCONF = 'financial_assistant.urls'
@@ -90,7 +93,20 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static_dev',
 ]
 
-#Debug Toolbar configure Internal IPs
+MEDIA_ROOT = BASE_DIR / 'media'
+
+# Debug Toolbar configure Internal IPs
 INTERNAL_IPS = [
     '127.0.0.1',
-] 
+]
+
+X_FRAME_OPTIONS = 'SAMEORIGIN'
+
+# STATICFILES_FINDERS = [
+#     'django.contrib.staticfiles.finders.FileSystemFinder',
+#     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+#
+#     'django_plotly_dash.finders.DashAssetFinder',
+#     'django_plotly_dash.finders.DashComponentFinder',
+#     'django_plotly_dash.finders.DashAppDirectoryFinder',
+# ]

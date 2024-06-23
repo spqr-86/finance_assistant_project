@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %} Транзакции {% endblock %}
+{% block content %}
+<h5 class="center-align">Загрузить файл</h5>
+
+<form method="post" enctype="multipart/form-data" >
+  <table>
+    {% csrf_token %}
+    {{ form }}
+  </table>
+  <div class="form-footer">
+    <button type="submit" class="btn waves-effect waves-light">
+      Загрузить
+    </button>
+  </div>
+</form>
+
+<!--{% if data %}-->
+<!--    <h2>Результаты парсинга:</h2>-->
+<!--    <ul>-->
+<!--        {% for transaction in data %}-->
+<!--            <li>-->
+<!--                Операция: {{ transaction.date_time_operation }}<br>-->
+<!--                Списание: {{ transaction.date_time_splitting }}<br>-->
+<!--                Сумма: {{ transaction.amount }}<br>-->
+<!--                Описание: {{ transaction.description }}<br>-->
+<!--                Номер карты: {{ transaction.card_number }}-->
+<!--            </li>-->
+<!--        {% endfor %}-->
+<!--    </ul>-->
+<!--{% else %}-->
+<!--<p>Нет данных</p>-->
+{% endif %}
+
+
+{% endblock %}
